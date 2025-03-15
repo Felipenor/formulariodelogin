@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  :root{
+  --body-bg: rgb(255, 136, 0); /* Cor de fundo do corpo do site */
+  --form-bg: rgba(7, 96, 163, 0.9); /* Cor de fundo do formulário */
+  --white: #ffffff;
+
+  /* Variáveis de cores primárias */
+  --main: #1ab05d;
+  --main-light: #1fbf8e;
+  --main-dark: #16997e;
+  --menu: rgba(160, 179, 179, 0.25);
+  --input: rgba(225, 225, 225, 0.5);
+  --gray-light: rgb(90, 1, 141);
+  --gray: #ddd;
+
+  --bold: 600; /* Fonte Negrito */
+  --thin: 300; /* Fonte Fina */
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: var(--body-bg);
+  font-family: Jokerman;
+}
+
+a{
+  text-decoration: none;
+  color: var(--main);
+  transition: 0.5s ease;
+}
+
+a:hover{
+  color: var(--main-dark);
+}
+
+.form{
+  background: var(--form-bg);
+  padding: 40px;
+  max-width: 600px;
+  margin: 180px auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px 4px rgba(0, 238, 255, 0.5);
+}
+
+.tab-group{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+}
+
+.tab-group::after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tab-group li a{
+  background: var(--menu);
+  color: var(--gray);
+  padding: 15px;
+  display: block;
+  font-size: 20px;
+  width: 50%;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.tab-group li a:hover{
+  background: var(--main-dark);
+  color: var(--gray);
+}
+
+.tab-group .active a{
+  background: var(--main-dark);
+  color: var(--gray);
+}
+
+h1{
+  text-align: center;
+  color: var(--gray);
+  font-weight: var(--thin);
+  margin: 0 0 40px;
+}
+
+label{
+  color: #061013;
+  font-size: 22px;
+  position: absolute;
+  transform: translateY(6px);
+  left: 13px;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+input, textarea{
+  color: var(--gray);
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  padding: 5px 90px;
+  border: 2px solid var(--main-dark);
+  background: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus, textarea:focus{
+  outline: 0;
+  border-color: var(--gray-light);
+}
+
+.field-warp{
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.button{
+  background: var(--main-dark);
+  color: var(--white);
+  padding: 15px 0;
+  border: none;
+  font-size: 2rem;
+  font-weight: var(--bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  appearance: none;
+  transition: all 0.5s ease;
+}
+
+.button:hover, .button:focus{
+  background: var(--gray-light);
+  color: var(--main-dark);
+}
+
+.button-block{
+  display: block;
+  width: 100%;
+}
+
+#signup {
+  display: block;
+}
+
+#login {
+  display: none;
+}
+  </style>
+  <title>Formulário de Login</title>
+</head>
+<body>
+  <div class="form">
+    <h1>Bem Vindo</h1>
+    <ul class="tab-group">
+      <li class="active"><a href="" id="signup-tab">Registrar</a></li>
+      <li><a href="" id="login-tab">Login</a></li>
+    </ul>
+
+    <div id="signup" class="signup">
+      <form>
+        <div class="field-warp">
+          <label for="signup-name">Nome:</label>
+          <input type="text" id="signup-name" required>
+        </div>
+
+        <div class="field-warp">
+          <label for="signup-email">E-mail:</label>
+          <input type="email" id="signup-email" required>
+        </div>
+
+        <div class="field-warp">
+          <label for="signup-password">Senha:</label>
+          <input type="password" id="signup-password" required>
+        </div>
+        <button type="submit" class="button button-block">Criar Conta</button>
+      </form>
+    </div>
+
+    <div id="login">
+      <form>
+        <div class="field-warp">
+          <label for="login-email">E-mail:</label>
+          <input type="email" id="login-email" required>
+        </div>    
+
+        <div class="field-warp">
+          <label for="login-password">Senha:</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <button type="submit" class="button button-block">Login</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const signupTab = document.getElementById('signup-tab');
+  const loginTab = document.getElementById('login-tab');
+  const signupForm = document.getElementById('signup'); 
+  const loginForm = document.getElementById('login');
+
+  function showSignup() {
+    signupForm.style.display = 'block';
+    loginForm.style.display = 'none';
+
+    signupTab.parentElement.classList.add('active');
+    loginTab.parentElement.classList.remove('active');
+  }
+
+  function showLogin() {
+    loginForm.style.display = 'block';
+    signupForm.style.display = 'none';
+
+    loginTab.parentElement.classList.add('active');
+    signupTab.parentElement.classList.remove('active');
+  }
+
+  signupTab.addEventListener('click', function(event) {
+    event.preventDefault();
+    showSignup();
+  });
+
+  loginTab.addEventListener('click', function(event) {
+    event.preventDefault();
+    showLogin();
+  });
+
+  showSignup();
+});
+  </script>
+</body>
+</html>
